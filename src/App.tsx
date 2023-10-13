@@ -1,34 +1,29 @@
 import { useState } from "preact/hooks";
 import { invoke } from "@tauri-apps/api/tauri";
+import { Directory, DirectoryNode } from "./fileManager/DirectoryNode";
 
 function App() {
-  const [greetMsg, setGreetMsg] = useState("");
-  const [name, setName] = useState("");
+  const [selectedDir, setSelectedDir] = useState<Directory>("");
 
-  async function greet() {
-    // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-    setGreetMsg(await invoke("greet", { name }));
+  async function chooseDirectory() {
+    const result: Directory | null = await invoke("select_directory");
+    if (result) {
+      setSelectedDir(result);
+    }
   }
 
   return (
-    <div class="container">
-      <h1>Welcome to Tauri!</h1>
-      <form
-        class="row"
-        onSubmit={(e) => {
-          e.preventDefault();
-          greet();
-        }}
-      >
-        <input
-          id="greet-input"
-          onInput={(e) => setName(e.currentTarget.value)}
-          placeholder="Enter a name..."
-        />
-        <button type="submit">Greet</button>
-      </form>
+    <div className="container">
+      <h1>File Explorer</h1>
 
-      <p>{greetMsg}</p>
+      <button onClick={chooseDirectory}>Choose Base Directory</button>
+
+      {selectedDir && (
+        <>
+          <p>Base Directory: {selectedDir}</p>
+          <DirectoryNode dir={selectedDir} />
+        </>
+      )}
     </div>
   );
 }

@@ -1,0 +1,14 @@
+.node-parent {
+  width: 100%;
+}
+
+.node {
+  display: flex;
+  align-items: center;
+  background-color: #f6f6f612;
+  padding: 0.2em;
+}
+
+.node:hover {
+  background-color: #f6f6f630;
+}
