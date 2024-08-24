@@ -9,8 +9,7 @@
 
 .container {
   margin: 0;
-  padding-top: 2vh;
-  padding-left: 2vh;
+  padding: 2vh;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

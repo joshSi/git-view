@@ -19,7 +19,7 @@ pub fn git_credentials_callback(
             println!("Authenticating with private key located in {}", key_path);
             Cred::ssh_key(user, None, PathBuf::from(&key_path).as_path(), None)
         }
-        Err(_) => Err(git2::Error::from_str("Unable to retrieve private key from GITVIEW_SSH_KEY")),
+        Err(_) => Err(git2::Error::from_str("Unable to retrieve private key from GITVIEW_SSH_PATH")),
     }
 }
 

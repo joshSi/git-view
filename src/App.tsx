@@ -24,7 +24,7 @@ function App() {
       <button onClick={chooseDirectory}>Choose Base Directory</button>
 
       {selectedDir && (
-        <div>
+        <div className="container">
           <p>Base Directory: {selectedDir}</p>
           <DirectoryNode dir={selectedDir} />
         </div>
@@ -37,6 +37,9 @@ function App() {
           id="clone-url"
           value={cloneUrl}
           onChange={(e) => setCloneUrl(e.target.value)}
+          autoComplete="on"
+          autoCorrect="off"
+          autoCapitalize="off"
         />
         <button onClick={cloneRepository}>Clone Repository</button>
       </div>
