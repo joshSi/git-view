@@ -1,5 +1,5 @@
 import { invoke } from "@tauri-apps/api";
-import { useState, useEffect } from "preact/hooks";
+import { useState, useEffect, useMemo } from "preact/hooks";
 import "./DirectoryNode.css";
 
 export type File = string;
@@ -29,6 +29,7 @@ export function FileNode({ filename }: FileNodeProps) {
 export function DirectoryNode({ dir }: DirectoryNodeProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [contents, setContents] = useState<FileSystemObject[]>([]);
+  const dirName = useMemo(() => dir.split('/').pop(), [dir]);
 
   async function retrieveDirectoryContents() {
     const files: File[] = await invoke("list_files", { path: dir });
@@ -53,7 +54,7 @@ export function DirectoryNode({ dir }: DirectoryNodeProps) {
     <div className="node-parent">
       <button className={`node`} onClick={toggleDirectory}>
         <div className="node-toggle">{isOpen ? '-' : '+'}</div>
-        <div className="node-dir">{dir}</div>
+        <div className="node-dir">{dirName}</div>
       </button>
       {isOpen && (
         <ul>

@@ -9,11 +9,11 @@ mod git_util;
 use git_util::{clone_repo};
 
 fn main() {
-    dotenv().ok();
-    tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![
-          	list_files, list_directories, select_directory, clone_repo
-        ])
-        .run(tauri::generate_context!())
-        .expect("error while running tauri application");
+  dotenv().ok();
+  tauri::Builder::default()
+    .invoke_handler(tauri::generate_handler![
+      list_files, list_directories, select_directory, clone_repo
+    ])
+    .run(tauri::generate_context!())
+    .expect("error while running tauri application");
 }
